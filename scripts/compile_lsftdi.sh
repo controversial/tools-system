@@ -51,7 +51,7 @@ cd examples || exit
 if [ "$ARCH" == "darwin" ]; then
   $CC -o lsftdi find_all.c -lftdi1 -lusb-1.0 -I../src
 elif [ "$ARCH" == "darwin_arm64" ]; then
-  cp ../build/examples/find_all lsftdi
+  $CC -o lsftdi find_all.c -lftdi1 -lusb-1.0 -I../src -L/opt/homebrew/opt/libftdi/lib/ -L/opt/homebrew/opt/libusb/lib/
 else
   $CC -o lsftdi find_all.c -static -lftdi1 -lusb-1.0 -lpthread -L"$PREFIX"/lib -L"$LIBUSB_PREFIX"/lib -I"$PREFIX"/include/libftdi1
 fi
@@ -62,7 +62,7 @@ cd ftdi_eeprom || exit
 if [ "$ARCH" == "darwin" ]; then
   $CC -o ftdi_eeprom main.c -lftdi1 -lusb-1.0 -lconfuse -I../src -I"$WORK_DIR"/build-data/includes -I"$PREFIX"/include/libftdi1 -I"$BUILD_DIR"/"$LIBUSB"/libusb -I"$BUILD_DIR"/"$LIBCONFUSE"/src
 elif [ "$ARCH" == "darwin_arm64" ]; then
-  cp ../build/ftdi_eeprom/ftdi_eeprom ftdi_eeprom
+  $CC -o ftdi_eeprom main.c -lftdi1 -lusb-1.0 -lconfuse -I../src -I"$WORK_DIR"/build-data/includes -I"$PREFIX"/include/libftdi1 -I"$BUILD_DIR"/"$LIBUSB"/libusb -I"$BUILD_DIR"/"$LIBCONFUSE"/src -L/opt/homebrew/opt/libftdi/lib/ -L/opt/homebrew/opt/libusb/lib/ -L/opt/homebrew/opt/confuse/lib/
 else
   $CC -o ftdi_eeprom main.c -static -lftdi1 -lusb-1.0 -lconfuse -lpthread -L"$PREFIX"/lib -L"$LIBUSB_PREFIX"/lib -L"$LIBCONFUSE_PREFIX"/lib -I"$WORK_DIR"/build-data/includes -I"$PREFIX"/include/libftdi1 -I"$LIBUSB_PREFIX"/include/libusb-1.0 -I"$LIBCONFUSE_PREFIX"/include
 fi
